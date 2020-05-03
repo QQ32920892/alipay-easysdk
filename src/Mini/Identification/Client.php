@@ -25,7 +25,7 @@ class Client extends AlipayAopClient
         $request = new AlipayRequest();
         $request->setBizContent($zhubQueryContentBuilder->getBizContent());
         $request->setApiMethodName("zoloz.identification.customer.certifyzhub.query");
-        return ($this->alipayAop->execute($request, NULL, $app_auth_token ?? $this->alipayAop->app_auth_token));
+        return $this->formatResponse($request, $app_auth_token ?? $this->alipayAop->app_auth_token);
     }
 
     public function queryUserWeb(string $biz_id, string $zim_id, string $extern_param, $app_auth_token)
@@ -38,6 +38,6 @@ class Client extends AlipayAopClient
         $request = new AlipayRequest();
         $request->setBizContent($userWebQueryContentBuilder->getBizContent());
         $request->setApiMethodName("zoloz.identification.user.web.query");
-        return ($this->alipayAop->execute($request, NULL, $app_auth_token ?? $this->alipayAop->app_auth_token));
+        return $this->formatResponse($request, $app_auth_token ?? $this->alipayAop->app_auth_token);
     }
 }
