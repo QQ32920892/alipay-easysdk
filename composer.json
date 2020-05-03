@@ -20,7 +20,8 @@
             "Supen\\Alipay\\": "src"
         },
         "classmap": [
-            "sdk/aop"
+            "sdk/aop",
+            "src/Koubei/Model"
         ]
     },
     "extra": {
