@@ -24,14 +24,10 @@ class Client extends AlipayAopClient
         // $createContentBuilder->setTotalAmount($total_amount);
         // $createContentBuilder->setBuyerId($buyer_id);
         
-        $requestService = new AlipayRequest();
-        $requestService->setNotifyUrl($notifyUrl ?? $this->config['notify_url']);
-        $requestService->setBizContent($createContentBuilder->getBizContent());
-        $requestService->setApiMethodName("alipay.trade.create");
-        $result = $this->alipayAop->execute($requestService, NULL, $app_auth_token ?? $this->alipayAop->app_auth_token);
-
-        $responseNode = str_replace(".", "_", $requestService->getApiMethodName()) . "_response";
-
-        return $result->$responseNode;
+        $request = new AlipayRequest();
+        $request->setNotifyUrl($notifyUrl ?? $this->config['notify_url']);
+        $request->setBizContent($createContentBuilder->getBizContent());
+        $request->setApiMethodName("alipay.trade.create");
+        return $this->formatResponse($request, $app_auth_token ?? $this->alipayAop->app_auth_token);
     }
 }

@@ -28,13 +28,9 @@ class Client extends AlipayAopClient
             'product_code'      => $productCode,
         ];
 
-        $requestService = new \ZhimaCreditScoreGetRequest();
-        $requestService->setBizContent(json_encode($bizContent));
-        return $result = $this->alipayAop->execute($requestService, $accessToken, $app_auth_token ?? $this->alipayAop->app_auth_token);
-
-        $responseNode = str_replace(".", "_", $requestService->getApiMethodName()) . "_response";
-
-        return $result->$responseNode;
+        $request = new \ZhimaCreditScoreGetRequest();
+        $request->setBizContent(json_encode($bizContent));
+        return $this->formatResponse($request, $app_auth_token ?? $this->alipayAop->app_auth_token);
     }
 
     /**
@@ -58,17 +54,9 @@ class Client extends AlipayAopClient
             'ext_biz_param'     => json_encode($extBizParam),
         ];
 
-        $requestService = new \ZhimaCustomerAuthMutualviewApplyRequest();
-        $requestService->setBizContent(json_encode($bizContent));
+        $request = new \ZhimaCustomerAuthMutualviewApplyRequest();
+        $request->setBizContent(json_encode($bizContent));
 
-        return $result = $this->alipayAop->execute($requestService, null, $app_auth_token ?? $this->alipayAop->app_auth_token);
-
-        if (isset($result->error_response)) {
-            return $result;
-        }
-
-        $responseNode = str_replace(".", "_", $requestService->getApiMethodName()) . "_response";
-
-        return $result;
+        return $this->formatResponse($request, $app_auth_token ?? $this->alipayAop->app_auth_token);
     }
 }

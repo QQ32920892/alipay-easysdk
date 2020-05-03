@@ -14,13 +14,8 @@ class Client extends AlipayAopClient
      */
     public function summaryBatchquery(array $requestOption = ['op_role' => 'ISV','query_type'=>'MERCHANT_SELF'], $app_auth_token = null)
     {
-        $requestService = new \AlipayOfflineMarketShopSummaryBatchqueryRequest ();
-        $requestService->setBizContent(json_encode($requestOption));
-
-        $result = $this->alipayAop->execute($requestService, null, $app_auth_token ?? $this->alipayAop->app_auth_token);
-
-        $responseNode = str_replace(".", "_", $requestService->getApiMethodName()) . "_response";
-
-        return $result->$responseNode;
+        $request = new \AlipayOfflineMarketShopSummaryBatchqueryRequest ();
+        $request->setBizContent(json_encode($requestOption));
+        return $this->formatResponse($request, $app_auth_token ?? $this->alipayAop->app_auth_token);
     }
 }

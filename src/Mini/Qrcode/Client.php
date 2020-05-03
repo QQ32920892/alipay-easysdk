@@ -25,7 +25,7 @@ class Client extends AlipayAopClient
         $request = new AlipayRequest ();
         $request->setBizContent($qrcodeContentBuilder->getBizContent());
         $request->setApiMethodName("alipay.open.app.qrcode.create");
-        return($this->alipayAop->execute($request, NULL, $app_auth_token ?? $this->alipayAop->app_auth_token)) ;
+        return $this->formatResponse($request, $app_auth_token ?? $this->alipayAop->app_auth_token);
     }
 
 }
