@@ -35,4 +35,23 @@ class Client extends AlipayAopClient
         $request->setApiMethodName("alipay.trade.query");
         return $this->formatResponse($request, $app_auth_token ?? $this->alipayAop->app_auth_token);
     }
+
+    /**
+     * alipay.marketing.facetoface.decode.use(当面付付款码解码)
+     * https://opendocs.alipay.com/apis/api_5/alipay.marketing.facetoface.decode.use
+     *
+     * @param string $dynamicId 付款码码值 
+     * @param string $senceNo
+     * @param string $app_auth_token
+     * @return void
+     */
+    public function facetofaceDecodeUse(string $dynamicId, string $senceNo, string $app_auth_token = null)
+    {
+        $request = new \AlipayMarketingFacetofaceDecodeUseRequest();
+        $request->setBizContent(json_encode([
+            "dynamic_id" => $dynamicId,
+            "sence_no" => $senceNo,
+        ]));
+        return $this->formatResponse($request, $app_auth_token ?? $this->alipayAop->app_auth_token);
+    }
 }
