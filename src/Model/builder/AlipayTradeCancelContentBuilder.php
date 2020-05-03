@@ -48,8 +48,4 @@ class AlipayTradeCancelContentBuilder extends ContentBuilder
         $this->tradeNo = $tradeNo;
         $this->bizContentarr['trade_no'] = $tradeNo;
     }
-
-
 }
-
-?>
