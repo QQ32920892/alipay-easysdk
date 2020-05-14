@@ -16,7 +16,6 @@ class Client extends AlipayAopClient
     {
         $request = new \KoubeiMarketingDataNearmallQueryRequest();
         $request->setBizContent(json_encode($requestService->getBizContent()));
-        print_r($this->config);exit;
         return $this->formatResponse($request, $app_auth_token ?? $this->alipayAop->app_auth_token);
     }
 }
